@@ -1,68 +1,66 @@
 # LangGraph Agentic Chatbot
 
-Deployed on HuggigFace Spaces. Here is the link to the live site:
+LangGraph + Gradio chatbot that can call Tavily web search as a tool during conversation.
 
-This repository contains a LangGraph-based chatbot that utilizes Gradio for interface rendering and integrates OpenAI's language model capabilities and custom tools for enhanced functionality. This project allowed me to learn and explore the capabilities of LangGraph and Agnetic workflows.
+## Quick Start
 
-## Tech Stack
+```bash
+git clone https://github.com/akileshjayakumar/langgraph-agentic-chatbot.git
+cd langgraph-agentic-chatbot
+python -m venv .venv
+source .venv/bin/activate
+pip install -r infra/requirements.txt
+```
 
+Create `.env` in the repo root:
 
-- **Frontend:**
+```env
+OPENAI_API_KEY=your_openai_api_key
+TAVILY_API_KEY=your_tavily_api_key
+OPENAI_MODEL=gpt-4
+OPENAI_TEMPERATURE=0
+```
 
-  - **[Gradio](https://gradio.app/docs)**
+Run locally:
 
-- **Backend:**
+```bash
+python app/app.py
+```
 
-  - **[LangGraph](https://langgraph.dev/)**
-  - **[LangChain](https://python.langchain.com/en/latest/)**
-  - **[Python](https://www.python.org/)**
+Open `http://localhost:7860`.
 
-- **APIs:**
+## Core Capabilities
 
-  - **[OpenAI API](https://platform.openai.com/docs)**
-  - **[Tavily Search API](https://tavilyapi.com/docs)**
+- Conversational interface built with Gradio `ChatInterface`
+- LangGraph workflow with tool routing (`chatbot -> tools -> chatbot`)
+- Tavily search integration for web-backed responses
+- Configurable model and temperature through environment variables
 
-- **Version Control:**
-  - **[Git](https://git-scm.com/doc)**
+## Configuration
 
-## Setup
+Required:
 
-To run this project locally, follow these steps:
+- `OPENAI_API_KEY`
+- `TAVILY_API_KEY`
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/your-repo/langgraph-agentic-chatbot.git
-   ```
-2. **Navigate to the project directory:**
-   ```bash
-   cd langgraph-agentic-chatbot
-   ```
-3. **Install dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
-4. **Set up environment variables:**
+Optional:
 
-   Create a `.env` file in the root directory and add your OpenAI API key and LangChain API key to trace the chatbot's interactions.
+- `OPENAI_MODEL` (default: `gpt-4`)
+- `OPENAI_TEMPERATURE` (default: `0`)
 
-   ```
-   LANGCHAIN_TRACING_V2=true
-   LANGCHAIN_ENDPOINT="https://api.example.langchain.com"
-   LANGCHAIN_API_KEY="your_langchain_api_key"
-   LANGCHAIN_PROJECT="your_langchain_project"
-   ```
+## Usage Example
 
-   ```
-   OPENAI_API_KEY="your_openai_api_key"
-   TAVILY_API_KEY="your_tavily_api_key"
-   ```
+Try prompts like:
 
-5. **Run the Gradio application:**
+- `What are the latest updates on NVIDIA's new GPU?`
+- `Give me today's top AI headlines.`
 
-   ```bash
-   gradio agent/main.py
-   ```
+## Contributing and Testing
 
-6. **Access the chatbot:**
+- Open an issue or PR with a focused change.
+- Basic local validation: start the app with `python app/app.py` and verify chat + tool calls work.
+- Docker path: `docker build -f infra/Dockerfile .`
 
-   Open `http://localhost:7860` in your web browser to interact with the chatbot.
+## License
+
+MIT. See `LICENSE`.
